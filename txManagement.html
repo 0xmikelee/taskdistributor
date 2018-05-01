@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="form-group">
+      <label for="tx.name">Name</label>
+      <input class="form-control" id="tx.name" placeholder="Name">
+    </div>
+    <div class="form-group">
+      <label for="tx.email">Email Address</label>
+      <input type="email" class="form-control" id="tx.email" placeholder="Email Address">
+    </div>
+    <button class="form-control" onclick="addTranscriber();">Add Transcriber</button>
+  </body>
+  <script src="//cdn.jsdelivr.net/bluebird/3.5.0/bluebird.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+    var mode ='<?= mode ?>'
+    <?!= include('client.js'); ?>
+  </script>
+</html>
