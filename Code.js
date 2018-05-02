@@ -6,6 +6,7 @@ function onOpen(e) {
 	var addonMenu = SpreadsheetApp.getUi().createAddonMenu()
 
 	addonMenu.addItem('Transcriber Management', 'onShowTxManagementSidebar')
+	addonMenu.addItem('Settings', 'onShowSettingsSidebar')
 	addonMenu.addToUi()
 }
 
@@ -20,7 +21,15 @@ function onShowTxManagementSidebar() {
 		.showSidebar(html.evaluate()
 			.setSandboxMode(HtmlService.SandboxMode.IFRAME)
 			.setTitle('Transcribers Management'))
+}
 
+function onShowSettingsSidebar() {
+	var html = HtmlService.createTemplateFromFile('settings')
+	html.mode = 'addon'
+	SpreadsheetApp.getUi()
+		.showSidebar(html.evaluate()
+			.setSandboxMode(HtmlService.SandboxMode.IFRAME)
+			.setTitle('Settings'))
 }
 
 /**
@@ -47,7 +56,7 @@ function getHeaderIndex(sheetName) {
 	var headerCol = {}
 
 	if (sheetName === 'Transcribers') {
-		var headers = ['Name', 'Email', 'SheetID']
+		var headers = ['Name', 'Email', 'FileID']
 	}
 
 	var _range = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()
@@ -62,7 +71,25 @@ function newTranscriber(newTx) {
 	var headerIndex = getHeaderIndex('Transcribers')
 	var newRowNum = sheet.getLastRow() + 1
 
+	//Create a new Spreadsheet File for the new Transcriber
+	var templateFileId = PropertiesService.getUserProperties().getProperty('templateFileId')
+	var templateFile = DriveApp.getFileById(templateFileId)
+	var newFile = templateFile.makeCopy('Transcription Tasks (' + newTx.name + ')')
+
 	sheet.getRange(newRowNum, headerIndex['Name'], 1, 1).setValue(newTx.name)
 	sheet.getRange(newRowNum, headerIndex['Email'], 1, 1).setValue(newTx.email)
+	sheet.getRange(newRowNum, headerIndex['FileID'], 1, 1).setValue(newFile.getId())
 
+	SpreadsheetApp.getActiveSpreadsheet().toast('New Transcriber has been added', '', 3)
+	return null
+}
+
+function saveSettings(newSettings) {
+	PropertiesService.getUserProperties().setProperties(newSettings)
+	SpreadsheetApp.getActiveSpreadsheet().toast('Settings have been saved', '', 3)
+	return null
+}
+
+function getSavedProperties() {
+	return PropertiesService.getUserProperties().getProperties()
 }

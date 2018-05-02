@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="form-group">
+      <label for="settings.txTaskTemplateFileId">Template File ID</label>
+      <input class="form-control" id="settings.txTaskTemplateFileId" placeholder="File ID">
+    </div>
+    <button class="form-control" onclick="saveSettings();">Save Settings</button>
+  </body>
+  <script src="//cdn.jsdelivr.net/bluebird/3.5.0/bluebird.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+    var mode ='<?= mode ?>'
+    <?!= include('client.js'); ?>
+
+    window.populateSettings()
+  </script>
+</html>

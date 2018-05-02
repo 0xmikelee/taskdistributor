@@ -37,6 +37,21 @@ window.addTranscriber = function () {
     name: document.getElementById('tx.name').value,
     email: document.getElementById('tx.email').value,
   }
-  
+
   Provoke.run(null, 'newTranscriber', newTx)
+}
+
+window.saveSettings = function () {
+  var newSettings = {
+    templateFileId: document.getElementById('settings.txTaskTemplateFileId').value
+  }
+
+  Provoke.run(null, 'saveSettings', newSettings)
+}
+
+window.populateSettings = function () {
+  Provoke.run(null, 'getSavedProperties')
+    .then(function (savedProperties) {
+      document.getElementById('settings.txTaskTemplateFileId').value = savedProperties['templateFileId']
+    })
 }
