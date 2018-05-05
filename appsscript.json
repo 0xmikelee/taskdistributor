@@ -1,6 +1,11 @@
 {
   "timeZone": "Asia/Hong_Kong",
   "dependencies": {
+  	"libraries": [{
+      "userSymbol": "LodashGS",
+      "libraryId": "1SQ0PlSMwndIuOAgtVJdjxsuXueECtY9OGejVDS37ckSVbMll73EXf2PW",
+      "version": "2"
+    }]
   },
   "exceptionLogging": "STACKDRIVER"
 }

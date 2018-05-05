@@ -41,6 +41,10 @@ window.addTranscriber = function () {
   Provoke.run(null, 'newTranscriber', newTx)
 }
 
+window.distributeTasks = function () {
+  Provoke.run(null, 'distributeTasks')
+}
+
 window.saveSettings = function () {
   var newSettings = {
     templateFileId: document.getElementById('settings.txTaskTemplateFileId').value
