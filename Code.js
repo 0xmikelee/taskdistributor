@@ -125,6 +125,11 @@ function distributeTasks() {
 	var tasksMasterSheet = getSheet('TasksMaster')
 	var headerIndexTasksMaster = getHeaderIndex('TasksMaster')
 
+	if (tasksMasterSheet.getLastRow() === 1) {
+		SpreadsheetApp.getActiveSpreadsheet().toast('Abort: No tasks were entered')
+		throw new Error('No tasks were entered')
+	}
+
 	//Distribute Tasks that has a name but does not have distribution dates
 	var dataFile = tasksMasterSheet.getRange(2, headerIndexTasksMaster['File'], tasksMasterSheet.getLastRow() - 1, 1).getValues()
 	var dataMP3 = tasksMasterSheet.getRange(2, headerIndexTasksMaster['MP3 Source'], tasksMasterSheet.getLastRow() - 1, 1).getValues()

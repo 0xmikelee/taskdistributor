@@ -1,6 +1,6 @@
 {
   "name": "taskdistributor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Allows user to distribute tasks via google spreadsheets",
   "main": "index.js",
   "scripts": {
